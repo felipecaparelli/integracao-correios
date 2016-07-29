@@ -116,7 +116,6 @@ public class ConsultaCorreios {
 	public CorreiosPrecoPrazo[] calcularPrecoPrazo(String cepOrigem, String cepDestino) throws Exception {
 
         SoapClient client = SoapClient.builder()
-        		.proxyUri("http://px-tb2:8080")
                 .endpointUri("http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx")
                 .build();
 
