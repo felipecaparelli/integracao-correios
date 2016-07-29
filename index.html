@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Integracao-correios by felipecaparelli</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Integracao-correios</h1>
+      <h2 class="project-tagline">Biblioteca Java para Integração com o Web Service dos Correios (Prazo e Frete)</h2>
+      <a href="https://github.com/felipecaparelli/integracao-correios" class="btn">View on GitHub</a>
+      <a href="https://github.com/felipecaparelli/integracao-correios/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/felipecaparelli/integracao-correios/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="integracao-correios" class="anchor" href="#integracao-correios" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>integracao-correios</h1>
+
+<p>Biblioteca Java para Integração com o Web Service dos Correios (Prazo e Frete)</p>
+
+<h2>
+<a id="Índice" class="anchor" href="#%C3%8Dndice" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Índice</h2>
+
+<ul>
+<li><a href="#intro">Introdução</a></li>
+<li><a href="#configs">Configurações</a></li>
+<li><a href="#basic">Uso básico</a></li>
+<li><a href="#params">Parâmetros Complementares</a></li>
+<li><a href="#libs">Dependências</a></li>
+</ul>
+
+<h2>
+<a id="-introdução" class="anchor" href="#-introdu%C3%A7%C3%A3o" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="intro"></a> Introdução</h2>
+
+<p>Este projeto tem como propósito oferecer uma alternativa simples para a execução do <a href="http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL">web service SOAP</a> provido pela empresa <strong>Correios</strong> para os recursos de consulta de prazo e preço do frete. O serviço SOAP do Correios não é muito complexo, mas a idéia é abstrair o uso do SOAP para que você possa focar apenas na integração da sua loja virtual com o serviço que precisa.</p>
+
+<h2>
+<a id="-configurações" class="anchor" href="#-configura%C3%A7%C3%B5es" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="configs"></a> Configurações</h2>
+
+<p>Se você deseja utilizar este projeto como uma biblioteca do seu projeto deverá seguir os seguintes passos:</p>
+
+<ol>
+<li>Baixe o projeto <code>git clone https://github.com/felipecaparelli/integracao-correios.git</code>
+</li>
+<li>Execute o maven <code>mvn clean install</code>
+</li>
+<li>Se você não utiliza o maven em seu projeto, copie a biblioteca /integracao-correios/correios-client/target/correios-client-0.0.1-SNAPSHOT.jar para seu diretório WEB-INF/lib, junto com uma tonelada de dependências listadas no <a href="#libs">final deste arquivo</a>.</li>
+<li>Voila!</li>
+</ol>
+
+<h2>
+<a id="-uso-básico" class="anchor" href="#-uso-b%C3%A1sico" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="basic"></a> Uso básico</h2>
+
+<p>O serviço já vem com os dados básicos da pesquisa preenchidos, sendo o serviço padrão utilizado o 'SEDEX Varejo'</p>
+
+<div class="highlight highlight-source-java"><pre>            <span class="pl-smi">CorreiosPrecoPrazo</span> result <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">ConsultaCorreios</span>()<span class="pl-k">.</span>calcularPrecoPrazo(<span class="pl-s"><span class="pl-pds">"</span>06053040<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>80540220<span class="pl-pds">"</span></span>)[<span class="pl-c1">0</span>];
+
+            <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>Preço do Frete: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> result<span class="pl-k">.</span>getPrecoFrete());
+            <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-smi">String</span><span class="pl-k">.</span>format(<span class="pl-s"><span class="pl-pds">"</span>Prazo de Entrega: %d dias<span class="pl-pds">"</span></span>, result<span class="pl-k">.</span>getPrazoEntrega()));</pre></div>
+
+<p>Deixo claro que o objeto que construo no retorno não possui a mesma interface do objeto retornado pelo serviço do Correios, mas contém todos os dados que eles devolvem. Na realidade, a intenção do objeto que eu retorno é deixar mais claras as informações providas.</p>
+
+<p>Como o foco do projeto é sem um facilitador para programadores Java na integração com o serviço dos Correios, os dados parametrizados e retornados são em geral constituídos de variaveis que sejam coerentes com os tipos necessários (por exemplo, valores monetários que utilizaremos para cálculos são retornados como Double). </p>
+
+<h2>
+<a id="-parâmetros-complementares" class="anchor" href="#-par%C3%A2metros-complementares" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="params"></a> Parâmetros Complementares</h2>
+
+<p>A API permite parametrizar todos os dados aceitos no web service do Correios, seguindo as mesmas <a href="https://www.correios.com.br/para-voce/correios-de-a-a-z/pdf/calculador-remoto-de-precos-e-prazos/manual-de-implementacao-do-calculo-remoto-de-precos-e-prazos">regras da validação do mesmo</a>:</p>
+
+<div class="highlight highlight-source-java"><pre>            <span class="pl-smi">CorreiosPrecoPrazo</span> result <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">ConsultaCorreios</span>()
+                                                    .servicos(<span class="pl-smi">CorreiosTipoServico</span><span class="pl-c1"><span class="pl-k">.</span>PAC_VAREJO</span>) <span class="pl-c">//tipo de serviço 'PAC'</span>
+                                                    .entregarEmMaos(<span class="pl-smi">IndicadorSN</span><span class="pl-c1"><span class="pl-k">.</span>SIM</span>) <span class="pl-c">//indicador que define se a entrega deve ser em mãos</span>
+                                                    .calcularPrecoPrazo(<span class="pl-s"><span class="pl-pds">"</span>06053040<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>80540220<span class="pl-pds">"</span></span>)[<span class="pl-c1">0</span>];
+
+            <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>Preço do Frete: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> result<span class="pl-k">.</span>getPrecoFrete());
+            <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-smi">String</span><span class="pl-k">.</span>format(<span class="pl-s"><span class="pl-pds">"</span>Prazo de Entrega: %d dias<span class="pl-pds">"</span></span>, result<span class="pl-k">.</span>getPrazoEntrega()));</pre></div>
+
+<p>Perceba que o retorno é um array de objetos do tipo CorreiosPrecoPrazo, pois o serviço do Correios retorna 1 elemento para cada tipo de serviço consultado. Se você parametrizar mais de um serviço terá múltiplos retornos:</p>
+
+<div class="highlight highlight-source-java"><pre>            <span class="pl-k">CorreiosPrecoPrazo</span>[] results <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">ConsultaCorreios</span>()
+                                                    .servicos(<span class="pl-smi">CorreiosTipoServico</span><span class="pl-c1"><span class="pl-k">.</span>PAC_VAREJO</span>, <span class="pl-smi">CorreiosTipoServico</span><span class="pl-c1"><span class="pl-k">.</span>SEDEX_10_VAREJO</span>)
+                                                    .calcularPrecoPrazo(<span class="pl-s"><span class="pl-pds">"</span>06053040<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>80540220<span class="pl-pds">"</span></span>);
+
+            <span class="pl-k">for</span> (<span class="pl-smi">CorreiosPrecoPrazo</span> result <span class="pl-k">:</span> results) {
+                <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>Preço do Frete: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> result<span class="pl-k">.</span>getPrecoFrete());
+                <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-smi">String</span><span class="pl-k">.</span>format(<span class="pl-s"><span class="pl-pds">"</span>Prazo de Entrega: %d dias<span class="pl-pds">"</span></span>, result<span class="pl-k">.</span>getPrazoEntrega()));
+            }</pre></div>
+
+<p>Essa é uma versão inicial e tem muito para melhorar. Se tiver interesse em evoluir e implementar os outros serviços disponibilizados pelo Correios fique a vontade para fazer um fork ou colaborar com este projeto ;)</p>
+
+<h2>
+<a id="-dependências" class="anchor" href="#-depend%C3%AAncias" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="libs"></a> Dependências</h2>
+
+<p>Todas as bibliotecas deste projeto estão diretamente ligadas à biblioteca <a href="https://github.com/reficio/soap-ws">soap-ws</a>, que é utilizada para realizar a chamada SOAP do web service do Correios.</p>
+
+<ul>
+<li>junit-4.12.jar</li>
+<li>hamcrest-core-1.3.jar</li>
+<li>soap-builder-1.0.0-SNAPSHOT.jar</li>
+<li>soap-common-1.0.0-SNAPSHOT.jar</li>
+<li>wsdl4j-1.6.2.jar</li>
+<li>commons-lang3-3.1.jar</li>
+<li>xmlunit-1.3.jar</li>
+<li>soap-legacy-1.0.0-SNAPSHOT.jar</li>
+<li>xml-apis-1.0.b2.jar</li>
+<li>batik-ext-1.7.jar</li>
+<li>xercesImpl-2.10.0.jar</li>
+<li>xbean-fixed-2.4.0.jar</li>
+<li>xbean_xpath-2.4.0.jar</li>
+<li>xmlbeans-xmlpublic-2.5.0.jar</li>
+<li>stax-api-1.0.1.jar</li>
+<li>jsr173-1.0.jar</li>
+<li>saxon-9.1.0.8.jar</li>
+<li>saxon-dom-9.1.0.8.jar</li>
+<li>wsrf-xbeans-1.0.jar</li>
+<li>XmlSchema-1.4.5.jar</li>
+<li>soap-client-1.0.0-SNAPSHOT.jar</li>
+<li>httpclient-4.2.3.jar</li>
+<li>httpcore-4.2.2.jar</li>
+<li>log4j-1.2.17.jar</li>
+<li>commons-logging-1.1.1.jar</li>
+<li>commons-io-2.3.jar</li>
+<li>commons-codec-1.6.jar</li>
+<li>guava-osgi-11.0.1.jar</li>
+<li>soap-server-1.0.0-SNAPSHOT.jar</li>
+<li>spring-ws-core-2.1.1.RELEASE.jar</li>
+<li>spring-xml-2.1.1.RELEASE.jar</li>
+<li>spring-context-3.1.2.RELEASE.jar</li>
+<li>spring-expression-3.1.2.RELEASE.jar</li>
+<li>spring-asm-3.1.2.RELEASE.jar</li>
+<li>spring-aop-3.1.2.RELEASE.jar</li>
+<li>aopalliance-1.0.jar</li>
+<li>spring-oxm-3.1.2.RELEASE.jar</li>
+<li>commons-lang-2.5.jar</li>
+<li>spring-web-3.1.2.RELEASE.jar</li>
+<li>spring-webmvc-3.1.2.RELEASE.jar</li>
+<li>spring-context-support-3.1.2.RELEASE.jar</li>
+<li>stax-api-1.0-2.jar</li>
+<li>spring-core-3.1.2.RELEASE.jar</li>
+<li>spring-beans-3.1.2.RELEASE.jar</li>
+<li>jetty-embedded-6.1.26.jar</li>
+<li>jetty-6.1.26.jar</li>
+<li>servlet-api-2.5-20081211.jar</li>
+<li>jetty-sslengine-6.1.26.jar</li>
+<li>jsp-api-2.1.jar</li>
+<li>jetty-java5-threadpool-6.1.26.jar</li>
+<li>jetty-util-6.1.26.jar</li>
+<li>slf4j-api-1.6.6.jar</li>
+<li>slf4j-log4j12-1.6.6.jar</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/felipecaparelli/integracao-correios">Integracao-correios</a> is maintained by <a href="https://github.com/felipecaparelli">felipecaparelli</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
