@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<name>Integração - Correios (Client)</name>
+	<artifactId>correios-client</artifactId>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>br.com.techzee</groupId>
+		<artifactId>integracao-correios</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.reficio</groupId>
+			<artifactId>soap-builder</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.reficio</groupId>
+			<artifactId>soap-client</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.reficio</groupId>
+			<artifactId>soap-server</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<!--
+		<dependency>
+		    <groupId>com.sun.xml.bind</groupId>
+		    <artifactId>jaxb-impl</artifactId>
+		    <version>2.2.11</version>
+		</dependency> -->
+	</dependencies>
+	<repositories>
+		<repository>
+			<id>reficio</id>
+			<url>http://repo.reficio.org/maven/</url>
+		</repository>
+	</repositories>
+	<organization>
+		<name>TechZee</name>
+	</organization>
+</project>
