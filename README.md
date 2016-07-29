@@ -19,9 +19,8 @@ Se você deseja utilizar este projeto como uma biblioteca do seu projeto deverá
 
 1. Baixe o projeto `git clone https://github.com/felipecaparelli/integracao-correios.git`
 2. Execute o maven `mvn clean install`
-3. Se você não utiliza o maven em seu projeto, copie a biblioteca integracao-correios.jar para seu diretório WEB-INF/lib, junto com uma tonelada de dependências listadas no [final deste arquivo](#libs).
-4. Push to the branch: `git push origin my-new-feature`
-5. Voila!
+3. Se você não utiliza o maven em seu projeto, copie a biblioteca /integracao-correios/correios-client/target/correios-client-0.0.1-SNAPSHOT.jar para seu diretório WEB-INF/lib, junto com uma tonelada de dependências listadas no [final deste arquivo](#libs).
+4. Voila!
 
 
 ## <a name="basic"></a> Uso básico
