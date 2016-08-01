@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.techzee.correios.ws.dto.CorreiosPrecoPrazo;
+import br.com.techzee.correios.ws.enumeration.CorreiosTipoPacote;
 import br.com.techzee.correios.ws.enumeration.CorreiosTipoServico;
 import br.com.techzee.correios.ws.enumeration.IndicadorSN;
 import junit.framework.TestCase;
@@ -35,6 +36,18 @@ public class ConsultaCorreiosTest extends TestCase {
 										.calcularPrecoPrazo(cepOrigem, cepDestino);
 		assertNotNull(response);
 		assertEquals(2, response.length);
+	}
+
+	@Test
+	public void testPrecoPrazoEnvelope() throws Exception {
+
+		CorreiosPrecoPrazo[] response = new ConsultaCorreios()
+													.formato(CorreiosTipoPacote.ENVELOPE)
+													.calcularPrecoPrazo(cepOrigem, cepDestino);
+
+		assertNotNull(response);
+		assertEquals(1, response.length);
+		assertEquals(IndicadorSN.SIM, response[0].getFlagEntregaDomiciliar());
 	}
 
 }

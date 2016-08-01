@@ -61,7 +61,7 @@ public class CorreioResponseParser {
 		Node erro = document.getElementsByTagName("Erro").item(0);
 		String codigoErro = erro.getTextContent();
 
-		if(!ERRO_VAZIO.equals(codigoErro) && ERRO_SERVICO_INDISPONIVEL.equals(codigoErro)) {
+		if(ERRO_SERVICO_INDISPONIVEL.equals(codigoErro)) {
 			String mensagemErro = document.getElementsByTagName("MsgErro").item(0).getTextContent();
 			throw new Exception(mensagemErro);
 		}
@@ -72,6 +72,13 @@ public class CorreioResponseParser {
 		CorreiosPrecoPrazo[] retorno = new CorreiosPrecoPrazo[itens];
 
 		for (int i = 0; i < itens; i++) {
+
+			String codigoErro1 = document.getElementsByTagName("Erro").item(i).getTextContent();
+
+			if(!ERRO_VAZIO.equals(codigoErro1)) {
+				String mensagemErro = document.getElementsByTagName("MsgErro").item(i).getTextContent();
+				throw new Exception(mensagemErro);
+			}
 
 			//lendo os nodes do xml retornado
 			Node codigoServico = document.getElementsByTagName("Codigo").item(i);

@@ -15,17 +15,19 @@ public class ConsultaCorreios {
 	private String codigoEmpresa = "";
 	private String senha = "";
 	private String codigoServico = String.valueOf(CorreiosTipoServico.SEDEX_VAREJO.getCodigo());
-	private Integer codigoFormato = CorreiosTipoPacote.CAIXA_PACOTE.getCodigo();
-	private String valorPeso = "1";
-	private String valorComprimento = "16";
-	private String valorAltura = "2";
-	private String valorLargura = "11";
-	private String valorDiametro = "1";
-	private char flagEmMaos = IndicadorSN.NAO.getId();
-	private String valorDeclarado = "0";
-	private char flagAvisoRecebimento = IndicadorSN.NAO.getId();
 
-	public ConsultaCorreios() {}
+	private Integer codigoFormato = CorreiosTipoPacote.CAIXA_PACOTE.getCodigo();
+	private String valorPeso = CorreiosTipoPacote.CAIXA_PACOTE.getPeso();
+	private String valorComprimento = CorreiosTipoPacote.CAIXA_PACOTE.getComprimento();
+	private String valorAltura = CorreiosTipoPacote.CAIXA_PACOTE.getAltura();
+	private String valorLargura = CorreiosTipoPacote.CAIXA_PACOTE.getLargura();
+	private String valorDiametro = CorreiosTipoPacote.CAIXA_PACOTE.getDiametro();
+
+	private char flagEmMaos = IndicadorSN.NAO.getId();
+	private char flagAvisoRecebimento = IndicadorSN.NAO.getId();
+	private String valorDeclarado = "0";
+
+	public ConsultaCorreios() {	}
 
 	public ConsultaCorreios codigoEmpresa(String codigoEmpresa) {
 		this.codigoEmpresa = codigoEmpresa;
@@ -158,25 +160,6 @@ public class ConsultaCorreios {
         String response = client.post("http://tempuri.org/CalcPrecoPrazo", request);
 
         return CorreioResponseParser.parseCorreiosPrecoPrazo(response);
-	}
-
-
-
-	public static void main(String[] args) {
-
-		try {
-
-			CorreiosPrecoPrazo[] results = new ConsultaCorreios().calcularPrecoPrazo("06053040", "80540220");
-
-			for (CorreiosPrecoPrazo result : results) {
-				System.out.println("Preço do Frete: " + result.getPrecoFrete());
-				System.out.println(String.format("Prazo de Entrega: %d dias", result.getPrazoEntrega()));
-			}
-
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 }
