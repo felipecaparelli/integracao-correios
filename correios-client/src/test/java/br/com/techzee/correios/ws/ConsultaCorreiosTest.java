@@ -50,4 +50,16 @@ public class ConsultaCorreiosTest extends TestCase {
 		assertEquals(IndicadorSN.SIM, response[0].getFlagEntregaDomiciliar());
 	}
 
+	@Test
+	public void testPrecoPrazoSEDEX10() throws Exception {
+
+		CorreiosPrecoPrazo[] response = new ConsultaCorreios()
+													.servicos(CorreiosTipoServico.SEDEX_10_VAREJO)
+													.calcularPrecoPrazo(cepOrigem, cepDestino);
+
+		assertNotNull(response);
+		assertEquals(1, response.length);
+		assertEquals(IndicadorSN.SIM, response[0].getFlagEntregaDomiciliar());
+	}
+
 }
