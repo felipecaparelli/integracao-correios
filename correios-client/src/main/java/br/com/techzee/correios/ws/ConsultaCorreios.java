@@ -3,7 +3,7 @@ package br.com.techzee.correios.ws;
 import org.reficio.ws.client.core.SoapClient;
 
 import br.com.techzee.correios.ws.dto.CorreiosPrecoPrazo;
-import br.com.techzee.correios.ws.enumeration.CorreiosTipoPacote;
+import br.com.techzee.correios.ws.enumeration.CorreiosFormatoEmbalagem;
 import br.com.techzee.correios.ws.enumeration.CorreiosTipoServico;
 import br.com.techzee.correios.ws.enumeration.IndicadorSN;
 import br.com.techzee.correios.ws.parser.CorreioResponseParser;
@@ -16,12 +16,12 @@ public class ConsultaCorreios {
 	private String senha = "";
 	private String codigoServico = String.valueOf(CorreiosTipoServico.SEDEX_VAREJO.getCodigo());
 
-	private Integer codigoFormato = CorreiosTipoPacote.CAIXA_PACOTE.getCodigo();
-	private String valorPeso = CorreiosTipoPacote.CAIXA_PACOTE.getPeso();
-	private String valorComprimento = CorreiosTipoPacote.CAIXA_PACOTE.getComprimento();
-	private String valorAltura = CorreiosTipoPacote.CAIXA_PACOTE.getAltura();
-	private String valorLargura = CorreiosTipoPacote.CAIXA_PACOTE.getLargura();
-	private String valorDiametro = CorreiosTipoPacote.CAIXA_PACOTE.getDiametro();
+	private Integer codigoFormato = CorreiosFormatoEmbalagem.CAIXA_PACOTE.getCodigo();
+	private String valorPeso = CorreiosFormatoEmbalagem.CAIXA_PACOTE.getPeso();
+	private String valorComprimento = CorreiosFormatoEmbalagem.CAIXA_PACOTE.getComprimento();
+	private String valorAltura = CorreiosFormatoEmbalagem.CAIXA_PACOTE.getAltura();
+	private String valorLargura = CorreiosFormatoEmbalagem.CAIXA_PACOTE.getLargura();
+	private String valorDiametro = CorreiosFormatoEmbalagem.CAIXA_PACOTE.getDiametro();
 
 	private char flagEmMaos = IndicadorSN.NAO.getId();
 	private char flagAvisoRecebimento = IndicadorSN.NAO.getId();
@@ -29,16 +29,39 @@ public class ConsultaCorreios {
 
 	public ConsultaCorreios() {	}
 
+	/**
+	 * Parametriza o c&oacute;digo da empresa (informado pelo ECT) para ser
+	 * utilizado nas consultas do servi&ccedil;o do Correios.
+	 *
+	 * @param codigoEmpresa - conforme documenta&ccedil;&atilde;o do Correios, s&atilde;o os 8 primeiros digitos do CNPJ do cliente
+	 *
+	 * @return {@link ConsultaCorreios}
+	 */
 	public ConsultaCorreios codigoEmpresa(String codigoEmpresa) {
 		this.codigoEmpresa = codigoEmpresa;
 		return this;
 	}
 
+	/**
+	 * Parametriza a senha do cadastro da empresa nas consultas do servi&ccedil;o do Correios.
+	 *
+	 * @param senha - senha provida pelo Correios ap&oacute;s a contrata&ccedil;&atilde;o dos servi&ccedil;os
+	 *
+	 * @return {@link ConsultaCorreios}
+	 */
 	public ConsultaCorreios senha(String senha) {
 		this.senha = senha;
 		return this;
 	}
 
+	/**
+	 * M&eacute;todo utilizado para adicionar um ou mais servi&ccedil;os para a realiza&ccedil;&atilde;o da consulta do Correios.
+	 * Os valores v&aacute;lidos est&atilde;o dispon&iacute;veis no enum {@link CorreiosTipoServico}
+	 *
+	 * @param codigosServicos
+	 *
+	 * @return {@link ConsultaCorreios}
+	 */
 	public ConsultaCorreios servicos(CorreiosTipoServico ... codigosServicos) {
 
 		if(codigosServicos == null) throw new IllegalArgumentException("Favor informar ao menos um tipo de servi\u00e7o v\u00e1lido");
@@ -54,7 +77,13 @@ public class ConsultaCorreios {
 		return this;
 	}
 
-	public ConsultaCorreios formato(CorreiosTipoPacote formato) {
+	/**
+	 * Formato da embalagem/pacote a ser consultado.
+	 *
+	 * @param formato
+	 * @return
+	 */
+	public ConsultaCorreios formato(CorreiosFormatoEmbalagem formato) {
 		if(formato == null) throw new IllegalArgumentException("Favor informar ao menos um formato v\u00e1lido");
 		this.codigoFormato = formato.getCodigo();
 		return this;

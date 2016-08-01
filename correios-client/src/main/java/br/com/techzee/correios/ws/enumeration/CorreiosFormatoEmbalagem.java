@@ -1,7 +1,7 @@
 package br.com.techzee.correios.ws.enumeration;
 
 /**
- * Representa os tipos de pacote aceitos como parametro para a consulta ao
+ * Representa os formatos de embalagem aceitos como parametro para a consulta ao
  * servi&ccedil;o dos Correios.
  *
  * <ul>
@@ -13,7 +13,7 @@ package br.com.techzee.correios.ws.enumeration;
  * @author felipe.caparelli
  *
  */
-public enum CorreiosTipoPacote {
+public enum CorreiosFormatoEmbalagem {
 
 	//cada formato possui parametros default (minimos) para a execucao das chamadas
 	CAIXA_PACOTE(1, "Formato caixa/pacote", "1", "16", "2", "11", "1"),
@@ -28,7 +28,7 @@ public enum CorreiosTipoPacote {
 	private String largura;
 	private String diametro;
 
-	private CorreiosTipoPacote(int codigo, String nome, String peso, String comprimento, String altura, String largura,
+	private CorreiosFormatoEmbalagem(int codigo, String nome, String peso, String comprimento, String altura, String largura,
 			String diametro) {
 		this.codigo = codigo;
 		this.nome = nome;
