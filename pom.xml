@@ -6,6 +6,7 @@
 	<packaging>pom</packaging>
 	<name>Integração - Correios</name>
 	<description>Biblioteca Java para Integração com o Web Service dos Correios (Prazo e Frete).</description>
+	<url>http://github.com/felipecaparelli/integracao-correios</url>
 	<organization>
 		<name>TechZee</name>
 	</organization>
@@ -20,8 +21,22 @@
 		<license>
 			<name>Apache License, Version 2.0</name>
 			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
 		</license>
 	</licenses>
+	
+	<developers>
+		<developer>
+			<name>Felipe Caparelli</name>
+			<email>felipecaparelli@gmail.com</email>
+			<organization>TechZee</organization>
+			<!--<organizationUrl>http://www.techzee.com.br</organizationUrl>-->
+		</developer>
+	</developers>
+	
+	<scm>
+		<connection>scm:git:git://github.com/felipecaparelli/integracao-correios.git</connection>
+		<developerConnection>scm:git:ssh://github.com:felipecaparelli/integracao-correios.git</developerConnection>
+		<url>http://github.com/felipecaparelli/integracao-correios/tree/master</url>
+	</scm>
 	
 </project>
