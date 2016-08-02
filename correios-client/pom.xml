@@ -3,7 +3,7 @@
 	<artifactId>correios-client</artifactId>
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>br.com.techzee</groupId>
+		<groupId>com.github.felipecaparelli</groupId>
 		<artifactId>integracao-correios</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
@@ -42,6 +42,6 @@
 		</repository>
 	</repositories>
 	<organization>
-		<name>TechZee</name>
+		<name>WRO Consulting</name>
 	</organization>
 </project>
