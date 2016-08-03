@@ -5,5 +5,8 @@ branches:
   - stable
 language: java
 install: mvn install -DskipTests -Dgpg.skip
+script: mvn test
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - mvn clean test jacoco:report coveralls:report
+jdk:
+  - oraclejdk8
