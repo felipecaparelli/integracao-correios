@@ -5,3 +5,5 @@ branches:
   - stable
 language: java
 install: mvn install -DskipTests -Dgpg.skip
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
