@@ -35,39 +35,39 @@ public class CorreiosPrecoPrazo implements Serializable {
 	}
 
 	public Double getPrecoFrete() {
-		return precoFrete;
+		return this.precoFrete;
 	}
 
 	public Integer getPrazoEntrega() {
-		return prazoEntrega;
+		return this.prazoEntrega;
 	}
 
 	public CorreiosTipoServico getTipoServico() {
-		return tipoServico;
+		return this.tipoServico;
 	}
 
 	public Double getPrecoEntregaEmMaos() {
-		return precoEntregaEmMaos;
+		return this.precoEntregaEmMaos;
 	}
 
 	public Double getPrecoAvisoRecebimento() {
-		return precoAvisoRecebimento;
+		return this.precoAvisoRecebimento;
 	}
 
 	public Double getPrecoValorDeclarado() {
-		return precoValorDeclarado;
+		return this.precoValorDeclarado;
 	}
 
 	public Double getPrecoSemAdicionais() {
-		return precoSemAdicionais;
+		return this.precoSemAdicionais;
 	}
 
 	public IndicadorSN getFlagEntregaDomiciliar() {
-		return flagEntregaDomiciliar;
+		return this.flagEntregaDomiciliar;
 	}
 
 	public IndicadorSN getFlagEntregaSabado() {
-		return flagEntregaSabado;
+		return this.flagEntregaSabado;
 	}
 
 	public void setPrecoFrete(Double precoFrete) {
@@ -107,7 +107,7 @@ public class CorreiosPrecoPrazo implements Serializable {
 	}
 
 	public String getObservacoes() {
-		return observacoes;
+		return this.observacoes;
 	}
 
 	public void setObservacoes(String observacoes) {
@@ -118,7 +118,7 @@ public class CorreiosPrecoPrazo implements Serializable {
 	public String toString() {
 		return "{ \"precoFrete\": " + precoFrete +
 			   ", \"prazoEntrega\": " + prazoEntrega +
-			   ", \"tipoServico\": \"" + tipoServico.getNome() + "\"" +
+			   ", \"tipoServico\": \"" + ((tipoServico != null) ? tipoServico.getNome() : null)+ "\"" +
 			   ", \"precoEntregaEmMaos\": " + precoEntregaEmMaos +
 			   ", \"precoAvisoRecebimento\": " + precoAvisoRecebimento +
 			   ", \"precoValorDeclarado\": " + precoValorDeclarado +

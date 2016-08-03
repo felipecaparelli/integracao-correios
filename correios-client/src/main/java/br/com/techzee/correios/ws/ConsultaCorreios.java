@@ -27,7 +27,11 @@ public class ConsultaCorreios {
 	private char flagAvisoRecebimento = IndicadorSN.NAO.getId();
 	private String valorDeclarado = "0";
 
-	public ConsultaCorreios() {	}
+	private CorreioResponseParser parser;
+
+	public ConsultaCorreios() {
+		parser = new CorreioResponseParser();
+	}
 
 	/**
 	 * Parametriza o c&oacute;digo da empresa (informado pelo ECT) para ser
@@ -186,8 +190,8 @@ public class ConsultaCorreios {
 				this.valorDeclarado,
 				this.flagAvisoRecebimento);
 
-        String response = client.post("http://tempuri.org/CalcPrecoPrazo", request);
+        String xmlResponse = client.post("http://tempuri.org/CalcPrecoPrazo", request);
 
-        return CorreioResponseParser.parseCorreiosPrecoPrazo(response);
+        return parser.parseCorreiosPrecoPrazo(xmlResponse);
 	}
 }
