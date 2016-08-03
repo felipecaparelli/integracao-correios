@@ -1,59 +1,70 @@
 # integracao-correios [![Build Status](https://travis-ci.org/felipecaparelli/integracao-correios.svg?branch=master)](https://travis-ci.org/felipecaparelli/integracao-correios)
-Biblioteca Java para Integração com o Web Service dos Correios (Prazo e Frete)
+Biblioteca Java para Integra&ccedil;&atilde;o com o Web Service dos Correios (Prazo e Frete)
 
-## Índice
+## &Iacute;ndice
 
-- [Introdução](#intro)
-- [Configurações](#configs)
-- [Uso básico](#basic)
+- [Introdu&ccedil;&atilde;o](#intro)
+- [Configura&ccedil;&oatilde;es](#configs)
+- [Uso b&aacute;sico](#basic)
 - [Parâmetros Complementares](#params)
-- [Dependências](#libs)
+- [Depend&ecirc;ncias](#libs)
 
-## <a name="intro"></a> Introdução
+## <a name="intro"></a> Introdu&ccedil;&atilde;o
 
-Este projeto tem como propósito oferecer uma alternativa simples para a execução do [web service SOAP](http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL) provido pela empresa **Correios** para os recursos de consulta de prazo e preço do frete. O serviço SOAP do Correios não é muito complexo, mas a idéia é abstrair o uso do SOAP para que você possa focar apenas na integração da sua loja virtual com o serviço que precisa.
+Este projeto tem como prop&oacute;sito oferecer uma alternativa simples para a execu&ccedil;&atilde;o do [web service SOAP](http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL) provido pela empresa **Correios** para os recursos de consulta de prazo e pre&ccedil;o do frete. O servi&ccedil;o SOAP do Correios n&atilde;o é muito complexo, mas a idéia é abstrair o uso do SOAP para que voc&ecirc; possa focar apenas na integra&ccedil;&atilde;o da sua loja virtual com o servi&ccedil;o que precisa.
 
-## <a name="configs"></a> Configurações
+## <a name="configs"></a> Configura&ccedil;&oatilde;es
 
-Se você deseja utilizar este projeto como uma biblioteca do seu projeto deverá seguir os seguintes passos:
+Se quiser utilizar este projeto siga os seguintes passos:
+
+### Com o maven:
+
+1. Adicione ao seu pom.xml a depend&ecirc;ncia:
+```xml
+	<dependency>
+		<groupId>com.github.felipecaparelli</groupId>
+		<artifactId>correios-client</artifactId>
+		<version>1.0.1</version>
+	</dependency>
+```
+
+### Sem o maven:
 
 1. Baixe o projeto `git clone https://github.com/felipecaparelli/integracao-correios.git`
 2. Execute o maven `mvn clean install`
-3. Se você não utiliza o maven em seu projeto, copie a biblioteca /integracao-correios/correios-client/target/correios-client-0.0.1-SNAPSHOT.jar para seu diretório WEB-INF/lib, junto com uma tonelada de dependências listadas no [final deste arquivo](#libs).
-4. Voila!
+3. Copie a biblioteca /integracao-correios/correios-client/target/correios-client-0.0.1-SNAPSHOT.jar para seu diret&oacute;rio WEB-INF/lib, junto com uma tonelada de depend&ecirc;ncias listadas no [final deste arquivo](#libs).
 
 
-## <a name="basic"></a> Uso básico
+## <a name="basic"></a> Uso b&aacute;sico
 
 
-O serviço já vem com os dados básicos da pesquisa preenchidos, sendo o serviço padrão utilizado o 'SEDEX Varejo'
+O servi&ccedil;o j&aacute; vem com os dados b&aacute;sicos da pesquisa preenchidos, sendo o servi&ccedil;o padr&atilde;o utilizado o 'SEDEX Varejo'
 
 ```java
 			CorreiosPrecoPrazo result = new ConsultaCorreios().calcularPrecoPrazo("06053040", "80540220")[0];
 
-			System.out.println("Preço do Frete: " + result.getPrecoFrete());
-			System.out.println(String.format("Prazo de Entrega: %d dias", result.getPrazoEntrega()));
+			System.out.println(String.format("Valor do Frete: %f - Prazo de Entrega: %d dias", result.getPrecoFrete(), result.getPrazoEntrega()));
 ```
 
-Deixo claro que o objeto que construo no retorno não possui a mesma interface do objeto retornado pelo serviço do Correios, mas contém todos os dados que eles devolvem. Na realidade, a intenção do objeto que eu retorno é deixar mais claras as informações providas.
+Deixo claro que o objeto que construo no retorno n&atilde;o possui a mesma interface do objeto retornado pelo servi&ccedil;o do Correios, mas contém todos os dados que eles devolvem. Na realidade, a inten&ccedil;&atilde;o do objeto que eu retorno é deixar mais claras as informa&ccedil;ões providas.
 
-Como o foco do projeto é sem um facilitador para programadores Java na integração com o serviço dos Correios, os dados parametrizados e retornados são em geral constituídos de variaveis que sejam coerentes com os tipos necessários (por exemplo, valores monetários que utilizaremos para cálculos são retornados como Double). 
+Como o foco do projeto é sem um facilitador para programadores Java na integra&ccedil;&atilde;o com o servi&ccedil;o dos Correios, os dados parametrizados e retornados s&atilde;o em geral constituídos de variaveis que sejam coerentes com os tipos necess&aacute;rios (por exemplo, valores monet&aacute;rios que utilizaremos para c&aacute;lculos s&atilde;o retornados como Double). 
 
 ## <a name="params"></a> Parâmetros Complementares
 
-A API permite parametrizar todos os dados aceitos no web service do Correios, seguindo as mesmas [regras da validação do mesmo](https://www.correios.com.br/para-voce/correios-de-a-a-z/pdf/calculador-remoto-de-precos-e-prazos/manual-de-implementacao-do-calculo-remoto-de-precos-e-prazos):
+A API permite parametrizar todos os dados aceitos no web service do Correios, seguindo as mesmas [regras da valida&ccedil;&atilde;o do mesmo](https://www.correios.com.br/para-voce/correios-de-a-a-z/pdf/calculador-remoto-de-precos-e-prazos/manual-de-implementacao-do-calculo-remoto-de-precos-e-prazos):
 
 ```java
 			CorreiosPrecoPrazo result = new ConsultaCorreios()
-													.servicos(CorreiosTipoServico.PAC_VAREJO) //tipo de serviço 'PAC'
-													.entregarEmMaos(IndicadorSN.SIM) //indicador que define se a entrega deve ser em mãos
+													.servicos(CorreiosTipoServico.PAC_VAREJO) //tipo de servi&ccedil;o 'PAC'
+													.entregarEmMaos(IndicadorSN.SIM) //indicador que define se a entrega deve ser em m&atilde;os
 													.calcularPrecoPrazo("06053040", "80540220")[0];
 
-			System.out.println("Preço do Frete: " + result.getPrecoFrete());
+			System.out.println("Pre&ccedil;o do Frete: " + result.getPrecoFrete());
 			System.out.println(String.format("Prazo de Entrega: %d dias", result.getPrazoEntrega()));
 ```
 
-Perceba que o retorno é um array de objetos do tipo CorreiosPrecoPrazo, pois o serviço do Correios retorna 1 elemento para cada tipo de serviço consultado. Se você parametrizar mais de um serviço terá múltiplos retornos:
+Perceba que o retorno é um array de objetos do tipo CorreiosPrecoPrazo, pois o servi&ccedil;o do Correios retorna 1 elemento para cada tipo de servi&ccedil;o consultado. Se voc&ecirc; parametrizar mais de um servi&ccedil;o ter&aacute; múltiplos retornos:
 
 ```java
 			CorreiosPrecoPrazo[] results = new ConsultaCorreios()
@@ -61,17 +72,17 @@ Perceba que o retorno é um array de objetos do tipo CorreiosPrecoPrazo, pois o 
 													.calcularPrecoPrazo("06053040", "80540220");
 
 			for (CorreiosPrecoPrazo result : results) {
-				System.out.println("Preço do Frete: " + result.getPrecoFrete());
+				System.out.println("Pre&ccedil;o do Frete: " + result.getPrecoFrete());
 				System.out.println(String.format("Prazo de Entrega: %d dias", result.getPrazoEntrega()));
 			}
 ```
 
-Essa é uma versão inicial e tem muito para melhorar. Se tiver interesse em evoluir e implementar os outros serviços disponibilizados pelo Correios fique a vontade para fazer um fork ou colaborar com este projeto ;)
+Essa é uma vers&atilde;o inicial e tem muito para melhorar. Se tiver interesse em evoluir e implementar os outros servi&ccedil;os disponibilizados pelo Correios fique a vontade para fazer um fork ou colaborar com este projeto ;)
 
 
-## <a name="libs"></a> Dependências
+## <a name="libs"></a> Depend&ecirc;ncias
 
-Todas as bibliotecas deste projeto estão diretamente ligadas à biblioteca [soap-ws](https://github.com/reficio/soap-ws), que é utilizada para realizar a chamada SOAP do web service do Correios.
+Todas as bibliotecas deste projeto est&atilde;o diretamente ligadas à biblioteca [soap-ws](https://github.com/reficio/soap-ws), que é utilizada para realizar a chamada SOAP do web service do Correios.
 
 * junit-4.12.jar
 * hamcrest-core-1.3.jar
