@@ -36,11 +36,11 @@ public class CorreioResponseParser {
 	 * @param xml - string retornada pelo web service do Correios
 	 *
 	 * @return {@link Document}
-	 * @throws ParserConfigurationException
-	 * @throws IOException
-	 * @throws SAXException
 	 *
-	 * @throws Exception
+	 * @throws IllegalArgumentException caso o atributo recebido seja nulo
+	 * @throws ParserConfigurationException caso o parser nao seja configurado corretamente
+	 * @throws IOException caso nao seja recebido conteudo na String
+	 * @throws SAXException caso o parser receba um XML invalido
 	 */
 	private static Document loadXMLFromString(String xml) throws IllegalArgumentException, ParserConfigurationException, SAXException, IOException {
 
@@ -60,11 +60,10 @@ public class CorreioResponseParser {
 	 *
 	 * @return {@link CorreiosPrecoPrazo}
 	 *
-	 * @throws IOException
-	 * @throws SAXException
-	 * @throws ParserConfigurationException
-	 *
-	 * @throws Exception
+	 * @throws IllegalArgumentException caso o atributo recebido seja nulo
+	 * @throws ParserConfigurationException caso o parser nao seja configurado corretamente
+	 * @throws IOException caso nao seja recebido conteudo na String
+	 * @throws SAXException caso o parser receba um XML invalido
 	 */
 	public CorreiosPrecoPrazo[] parseCorreiosPrecoPrazo(String xmlResponse) throws IllegalArgumentException, ParserConfigurationException, SAXException, IOException {
 

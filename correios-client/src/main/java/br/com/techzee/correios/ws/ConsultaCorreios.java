@@ -9,6 +9,11 @@ import br.com.techzee.correios.ws.enumeration.IndicadorSN;
 import br.com.techzee.correios.ws.parser.CorreioResponseParser;
 import br.com.techzee.correios.ws.util.ConsultaCorreiosUtils;
 
+/**
+ * Classe principal do sistema que realiza a consulta ao servi&ccedil;o do Correios.
+ *
+ * @author felipe.caparelli
+ */
 public class ConsultaCorreios {
 
 	//parametros basicos para consulta apenas com CEP origem e destino
@@ -62,7 +67,7 @@ public class ConsultaCorreios {
 	 * M&eacute;todo utilizado para adicionar um ou mais servi&ccedil;os para a realiza&ccedil;&atilde;o da consulta do Correios.
 	 * Os valores v&aacute;lidos est&atilde;o dispon&iacute;veis no enum {@link CorreiosTipoServico}
 	 *
-	 * @param codigosServicos
+	 * @param codigosServicos - c&oacute;digo de servi&ccedil;o do Correios
 	 *
 	 * @return {@link ConsultaCorreios}
 	 */
@@ -84,8 +89,9 @@ public class ConsultaCorreios {
 	/**
 	 * Formato da embalagem/pacote a ser consultado.
 	 *
-	 * @param formato
-	 * @return
+	 * @param formato - formato da embalagem (pacote, rolo ou envelope)
+	 *
+	 * @return {@link ConsultaCorreios}
 	 */
 	public ConsultaCorreios formato(CorreiosFormatoEmbalagem formato) {
 		if(formato == null) throw new IllegalArgumentException("Favor informar ao menos um formato v\u00e1lido");
@@ -93,41 +99,98 @@ public class ConsultaCorreios {
 		return this;
 	}
 
+	/**
+	 * Parametriza o valor do peso da entrega.
+	 *
+	 * @param peso - peso do item a ser entregue
+	 *
+	 * @return {@link ConsultaCorreios}
+	 */
 	public ConsultaCorreios peso(Double peso) {
 		this.valorPeso = ConsultaCorreiosUtils.doubleToString(peso);
 		return this;
 	}
 
+	/**
+	 * Parametriza o valor do comprimento da entrega.
+	 *
+	 * @param comprimento - comprimento do item a ser entregue
+	 *
+	 * @return {@link ConsultaCorreios}
+	 */
 	public ConsultaCorreios comprimento(Double comprimento) {
 		this.valorComprimento = ConsultaCorreiosUtils.doubleToString(comprimento);
 		return this;
 	}
 
+	/**
+	 * Parametriza o valor da altura da entrega.
+	 *
+	 * @param altura - altura do item a ser entregue
+	 *
+	 * @return {@link ConsultaCorreios}
+	 */
 	public ConsultaCorreios altura(Double altura) {
 		this.valorAltura = ConsultaCorreiosUtils.doubleToString(altura);
 		return this;
 	}
 
+	/**
+	 * Parametriza o valor da largura da entrega.
+	 *
+	 * @param largura - largura do item a ser entregue
+	 *
+	 * @return {@link ConsultaCorreios}
+	 */
 	public ConsultaCorreios largura(Double largura) {
 		this.valorLargura = ConsultaCorreiosUtils.doubleToString(largura);
 		return this;
 	}
 
+	/**
+	 * Parametriza o valor do diametro da entrega.
+	 *
+	 * @param diametro - diametro do item a ser entregue
+	 *
+	 * @return {@link ConsultaCorreios}
+	 */
 	public ConsultaCorreios diametro(Double diametro) {
 		this.valorDiametro = ConsultaCorreiosUtils.doubleToString(diametro);
 		return this;
 	}
 
+	/**
+	 * Parametriza se a entrega deve ser deve ser em m&atilde;os.
+	 *
+	 * @param ind - indicador S ou N
+	 *
+	 * @return {@link ConsultaCorreios}
+	 */
 	public ConsultaCorreios entregarEmMaos(IndicadorSN ind) {
 		this.flagEmMaos = ind.getId();
 		return this;
 	}
 
+
+	/**
+	 * Parametriza se a entrega deve ter aviso de recebimento
+	 *
+	 * @param ind - indicador S ou N
+	 *
+	 * @return {@link ConsultaCorreios}
+	 */
 	public ConsultaCorreios avisoRecebimento(IndicadorSN ind) {
 		this.flagAvisoRecebimento = ind.getId();
 		return this;
 	}
 
+	/**
+	 * Parametriza um valor adicional para a entrega
+	 *
+	 * @param valorAdicional - valor monet&aacute;rio adicional
+	 *
+	 * @return {@link ConsultaCorreios}
+	 */
 	public ConsultaCorreios valorAdicionalDeclarado(Double valorAdicional) {
 		if(valorAdicional != null && valorAdicional != 0d) {
 			this.valorDeclarado = ConsultaCorreiosUtils.doubleToString(valorAdicional);
@@ -146,7 +209,7 @@ public class ConsultaCorreios {
 	 * @param cepDestino - CEP do comprador/cliente
 	 *
 	 * @return {@link CorreiosPrecoPrazo}[]
-	 * @throws Exception
+	 * @throws Exception caso o servico esteja indispon&iacute;vel
 	 */
 	public CorreiosPrecoPrazo[] calcularPrecoPrazo(String cepOrigem, String cepDestino) throws Exception {
 
