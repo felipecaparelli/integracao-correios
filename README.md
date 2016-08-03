@@ -1,4 +1,4 @@
-# integracao-correios [![Build Status](https://travis-ci.org/felipecaparelli/integracao-correios.svg?branch=master)](https://travis-ci.org/felipecaparelli/integracao-correios)
+# integracao-correios [![Build Status](https://travis-ci.org/felipecaparelli/integracao-correios.svg?branch=master)](https://travis-ci.org/felipecaparelli/integracao-correios) [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000)]() [![Coverage Status](https://coveralls.io/repos/github/felipecaparelli/integracao-correios/badge.svg?branch=master)](https://coveralls.io/github/felipecaparelli/integracao-correios?branch=master)
 Biblioteca Java para Integra&ccedil;&atilde;o com o Web Service dos Correios (Prazo e Frete)
 
 ## &Iacute;ndice
