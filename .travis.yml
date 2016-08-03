@@ -1,2 +1,7 @@
+# safelist
+branches:
+  only:
+  - master
+  - stable
 language: java
 install: mvn install -DskipTests -Dgpg.skip
