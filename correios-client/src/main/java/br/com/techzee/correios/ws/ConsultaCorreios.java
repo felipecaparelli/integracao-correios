@@ -190,5 +190,4 @@ public class ConsultaCorreios {
 
         return CorreioResponseParser.parseCorreiosPrecoPrazo(response);
 	}
-
 }
