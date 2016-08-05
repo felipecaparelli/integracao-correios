@@ -77,6 +77,9 @@ public class ConsultaCorreios {
 		StringBuilder servicos = new StringBuilder();
 
 		for (CorreiosTipoServico cod : codigosServicos) {
+			if(cod == null) {
+				throw new IllegalArgumentException("Favor informar ao menos um tipo de servi\u00e7o v\u00e1lido");
+			}
 			servicos.append(cod.getCodigo()).append(',');
 		}
 

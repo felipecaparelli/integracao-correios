@@ -41,6 +41,7 @@ public enum CorreiosTipoServico {
 	}
 
 	public static CorreiosTipoServico getByCodigo(Integer codigo) {
+		if(codigo == null) return null;
 		for (CorreiosTipoServico tipoServico : CorreiosTipoServico.values()) {
 			if(tipoServico.codigo == codigo) return tipoServico;
 		}

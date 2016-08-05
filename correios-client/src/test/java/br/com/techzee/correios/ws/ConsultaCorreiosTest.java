@@ -13,12 +13,33 @@ public class ConsultaCorreiosTest extends TestCase {
 
 	private String cepOrigem;
 	private String cepDestino;
+	private ConsultaCorreios consultaCorreios = new ConsultaCorreios();
 
 	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 		this.cepOrigem = "06053040";
 		this.cepDestino = "80540220";
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testTipoServicoInvalido() {
+		CorreiosTipoServico tipoServico = CorreiosTipoServico.getByCodigo(1);
+		assertNull(tipoServico);
+		try {
+			consultaCorreios.servicos(CorreiosTipoServico.getByCodigo(null));
+		} catch (Exception e) {
+		}
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFormatoInvalido() {
+		CorreiosFormatoEmbalagem formato = null;
+		assertNull(formato);
+		try {
+			consultaCorreios.formato(formato);
+		} catch (Exception e) {
+		}
 	}
 
 	@Test

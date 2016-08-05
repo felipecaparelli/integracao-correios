@@ -35,24 +35,22 @@ public class CorreioResponseParserTest extends TestCase {
 	}
 
 	@Test(expected = SAXParseException.class)
-	public void testRetornarSAXParseException() throws IllegalArgumentException, ParserConfigurationException, SAXException, IOException {
+	public void testRetornarSAXParseException() throws IllegalArgumentException, ParserConfigurationException, IOException {
+		CorreiosPrecoPrazo[] result = null;
 		try {
-			new CorreioResponseParser().parseCorreiosPrecoPrazo("");
-		} catch (IllegalArgumentException e) {
-		} catch (ParserConfigurationException e) {
+			result = new CorreioResponseParser().parseCorreiosPrecoPrazo("");
 		} catch (SAXException e) {
-		} catch (IOException e) {
+			assertNull(result);
 		}
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testRetornarErroNoParser() throws IllegalArgumentException, ParserConfigurationException, SAXException, IOException {
+	public void testRetornarErroNoParser() throws ParserConfigurationException, SAXException, IOException {
+		CorreiosPrecoPrazo[] result = null;
 		try {
-			new CorreioResponseParser().parseCorreiosPrecoPrazo(null);
+			result = new CorreioResponseParser().parseCorreiosPrecoPrazo(null);
 		} catch (IllegalArgumentException e) {
-		} catch (ParserConfigurationException e) {
-		} catch (SAXException e) {
-		} catch (IOException e) {
+			assertNull(result);
 		}
 	}
 
