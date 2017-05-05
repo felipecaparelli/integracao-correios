@@ -43,9 +43,9 @@ Se quiser utilizar este projeto siga os seguintes passos:
 O servi&ccedil;o j&aacute; vem com os dados b&aacute;sicos da pesquisa preenchidos, sendo o servi&ccedil;o padr&atilde;o utilizado o 'SEDEX Varejo'
 
 ```java
-			CorreiosPrecoPrazo result = new ConsultaCorreios().calcularPrecoPrazo("06053040", "80540220")[0];
+	CorreiosPrecoPrazo result = new ConsultaCorreios().calcularPrecoPrazo("06053040", "80540220")[0];
 
-			System.out.println(String.format("Valor do Frete: %f - Prazo de Entrega: %d dias", result.getPrecoFrete(), result.getPrazoEntrega()));
+	System.out.println(String.format("Valor do Frete: %f - Prazo de Entrega: %d dias", result.getPrecoFrete(), result.getPrazoEntrega()));
 ```
 
 Deixo claro que o objeto que construo no retorno n&atilde;o possui a mesma interface do objeto retornado pelo servi&ccedil;o do Correios, mas contém todos os dados que eles devolvem. Na realidade, a inten&ccedil;&atilde;o do objeto que eu retorno é deixar mais claras as informa&ccedil;ões providas.
@@ -57,26 +57,26 @@ Como o foco do projeto é sem um facilitador para programadores Java na integra&
 A API permite parametrizar todos os dados aceitos no web service do Correios, seguindo as mesmas [regras da valida&ccedil;&atilde;o do mesmo](https://www.correios.com.br/para-voce/correios-de-a-a-z/pdf/calculador-remoto-de-precos-e-prazos/manual-de-implementacao-do-calculo-remoto-de-precos-e-prazos):
 
 ```java
-			CorreiosPrecoPrazo result = new ConsultaCorreios()
-													.servicos(CorreiosTipoServico.PAC_VAREJO) //tipo de servi&ccedil;o 'PAC'
-													.entregarEmMaos(IndicadorSN.SIM) //indicador que define se a entrega deve ser em m&atilde;os
-													.calcularPrecoPrazo("06053040", "80540220")[0];
+	CorreiosPrecoPrazo result = new ConsultaCorreios()
+		.servicos(CorreiosTipoServico.PAC_VAREJO) //tipo de servi&ccedil;o 'PAC'
+		.entregarEmMaos(IndicadorSN.SIM) //indicador que define se a entrega deve ser em m&atilde;os
+		.calcularPrecoPrazo("06053040", "80540220")[0];
 
-			System.out.println("Pre&ccedil;o do Frete: " + result.getPrecoFrete());
-			System.out.println(String.format("Prazo de Entrega: %d dias", result.getPrazoEntrega()));
+	System.out.println("Pre&ccedil;o do Frete: " + result.getPrecoFrete());
+	System.out.println(String.format("Prazo de Entrega: %d dias", result.getPrazoEntrega()));
 ```
 
 Perceba que o retorno é um array de objetos do tipo CorreiosPrecoPrazo, pois o servi&ccedil;o do Correios retorna 1 elemento para cada tipo de servi&ccedil;o consultado. Se voc&ecirc; parametrizar mais de um servi&ccedil;o ter&aacute; múltiplos retornos:
 
 ```java
-			CorreiosPrecoPrazo[] results = new ConsultaCorreios()
-													.servicos(CorreiosTipoServico.PAC_VAREJO, CorreiosTipoServico.SEDEX_10_VAREJO)
-													.calcularPrecoPrazo("06053040", "80540220");
+	CorreiosPrecoPrazo[] results = new ConsultaCorreios()
+			.servicos(CorreiosTipoServico.PAC_VAREJO, CorreiosTipoServico.SEDEX_10_VAREJO)
+			.calcularPrecoPrazo("06053040", "80540220");
 
-			for (CorreiosPrecoPrazo result : results) {
-				System.out.println("Pre&ccedil;o do Frete: " + result.getPrecoFrete());
-				System.out.println(String.format("Prazo de Entrega: %d dias", result.getPrazoEntrega()));
-			}
+	for (CorreiosPrecoPrazo result : results) {
+		System.out.println("Pre&ccedil;o do Frete: " + result.getPrecoFrete());
+		System.out.println(String.format("Prazo de Entrega: %d dias", result.getPrazoEntrega()));
+	}
 ```
 
 Essa é uma vers&atilde;o inicial e tem muito para melhorar. Se tiver interesse em evoluir e implementar os outros servi&ccedil;os disponibilizados pelo Correios fique a vontade para fazer um fork ou colaborar com este projeto ;)
