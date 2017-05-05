@@ -6,7 +6,7 @@ Biblioteca Java para Integra&ccedil;&atilde;o com o Web Service dos Correios (Pr
 ## &Iacute;ndice
 
 - [Introdu&ccedil;&atilde;o](#intro)
-- [Configura&ccedil;&oatilde;es](#configs)
+- [Configura&ccedil;&otilde;es](#configs)
 - [Uso b&aacute;sico](#basic)
 - [Parâmetros Complementares](#params)
 - [Depend&ecirc;ncias](#libs)
