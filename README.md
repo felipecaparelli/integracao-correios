@@ -15,7 +15,7 @@ Biblioteca Java para Integra&ccedil;&atilde;o com o Web Service dos Correios (Pr
 
 Este projeto tem como prop&oacute;sito oferecer uma alternativa simples para a execu&ccedil;&atilde;o do [web service SOAP](http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL) provido pela empresa **Correios** para os recursos de consulta de prazo e pre&ccedil;o do frete. O servi&ccedil;o SOAP do Correios n&atilde;o é muito complexo, mas a idéia é abstrair o uso do SOAP para que voc&ecirc; possa focar apenas na integra&ccedil;&atilde;o da sua loja virtual com o servi&ccedil;o que precisa.
 
-## <a name="configs"></a> Configura&ccedil;&oatilde;es
+## <a name="configs"></a> Configura&ccedil;&otilde;es
 
 Se quiser utilizar este projeto siga os seguintes passos:
 
